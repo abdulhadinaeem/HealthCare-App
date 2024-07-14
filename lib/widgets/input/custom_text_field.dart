@@ -3,14 +3,25 @@ import 'package:get/get.dart';
 import 'package:healthcare/constants/app_colors.dart';
 
 class CustomTextField extends StatelessWidget {
-  const CustomTextField({
+  CustomTextField({
     super.key,
     required this.hintText,
     required this.title,
+    required this.controller,
+    required this.validator,
+    this.onChanged,
+    this.obscureText,
+    this.autofocus,
+    this.keyboardType
   });
+  TextInputType? keyboardType;
+  bool? autofocus = false;
   final String hintText;
   final String title;
-
+  bool? obscureText = false;
+  String? Function(String?)? validator;
+  TextEditingController controller = TextEditingController();
+  void Function(String)? onChanged;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -27,17 +38,25 @@ class CustomTextField extends StatelessWidget {
             ),
           ),
           TextFormField(
+            keyboardType:keyboardType ,
+            autofocus: autofocus??false,
+            obscureText: obscureText ?? false,
+            onChanged: onChanged,
+            controller: controller,
+            validator: validator,
+            style: context.textTheme.labelMedium
+                ?.copyWith(fontWeight: FontWeight.w500),
             decoration: InputDecoration(
-              fillColor: MaterialStateColor.resolveWith((states) {
-                if (states.contains(MaterialState.focused)) {
+              fillColor: WidgetStateColor.resolveWith((states) {
+                if (states.contains(WidgetState.focused)) {
                   return AppColors.textFieldFocusColor;
                 }
                 return Colors.white;
               }),
               filled: true,
               hintText: hintText,
-              hintStyle: MaterialStateTextStyle.resolveWith((states) {
-                if (states.contains(MaterialState.focused)) {
+              hintStyle: WidgetStateTextStyle.resolveWith((states) {
+                if (states.contains(WidgetState.focused)) {
                   return const TextStyle(
                     fontSize: 14,
                     color: AppColors.primaryColor,
@@ -56,6 +75,10 @@ class CustomTextField extends StatelessWidget {
               ),
               focusedBorder: const OutlineInputBorder(
                 borderSide: BorderSide(color: AppColors.primaryColor),
+                borderRadius: BorderRadius.all(Radius.circular(8)),
+              ),
+              disabledBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.red),
                 borderRadius: BorderRadius.all(Radius.circular(8)),
               ),
               border: const OutlineInputBorder(

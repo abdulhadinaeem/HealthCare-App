@@ -24,6 +24,7 @@ class AuthScreensHeading extends StatelessWidget {
         ),
         Text(
           title,
+          textAlign: TextAlign.center,
           style: context.textTheme.labelSmall?.copyWith(
             color: AppColors.textColor,
           ),

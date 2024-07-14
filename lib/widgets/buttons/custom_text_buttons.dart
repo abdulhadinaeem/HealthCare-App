@@ -22,6 +22,7 @@ class CustomTextButton extends StatelessWidget {
           child: Text(
             authType,
             style: context.textTheme.labelLarge?.copyWith(
+                color: AppColors.primaryColor,
                 decoration: TextDecoration.underline,
                 decorationColor: AppColors.primaryColor),
           ),

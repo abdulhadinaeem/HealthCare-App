@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:healthcare/controller/get_started_screen_controller.dart';
-import 'package:healthcare/routes/app_routes.dart';
+import 'package:healthcare/controller/intro_controller/get_started_screen_controller.dart';
 import 'package:healthcare/routes/route_names.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:healthcare/constants/app_colors.dart';
 import 'package:healthcare/constants/app_images.dart';
 import 'package:healthcare/widgets/buttons/custom_button.dart';
@@ -48,7 +46,9 @@ class GetStartedScreen extends StatelessWidget {
                   CustomButton(
                     title: 'Sign in as a Patient',
                     buttonColor: AppColors.buttonColor,
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.offNamed(RouteNames.loginScreen);
+                    },
                   ),
                   const SizedBox(
                     height: 20,
@@ -64,7 +64,7 @@ class GetStartedScreen extends StatelessWidget {
                     title: 'Already have an Account? ',
                     authType: 'Login',
                     onPressed: () {
-                      Get.offNamed(RouteNames.loginScreen);
+                      Get.toNamed(RouteNames.loginScreen);
                     },
                   ),
                 ],
